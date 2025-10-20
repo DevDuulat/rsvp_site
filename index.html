@@ -3,60 +3,103 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Агдам и Айжамал</title>
+        <title>Айжамал и Агдам</title>
         <script src="https://cdn.tailwindcss.com"></script>
 
         <!-- Подключаем свадебные шрифты -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&display=swap"
             rel="stylesheet"
         />
+        <style>
+            #music-player {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 99999;
+                pointer-events: auto;
+            }
 
+            #music-btn {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background: rgba(255, 182, 193, 0.8); /* мягкий розовый */
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #music-btn:hover {
+                transform: scale(1.1);
+                background: rgba(255, 182, 193, 1);
+            }
+
+            #music-btn svg {
+                width: 30px;
+                height: 30px;
+                fill: #b22222; /* тёмно-розовый */
+            }
+        </style>
         <style>
             .text-shadow-custom {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
             }
             .names-font {
-                font-family: 'Great Vibes', cursive;
+                font-family: 'Quicksand', sans-serif;
+                font-weight: 300; /* тонкий */
             }
-            .serif-font {
-                font-family: 'Playfair Display', serif;
+            .great-vibes-regular {
+                font-family: 'Great Vibes', cursive;
+                font-weight: 400;
+                font-style: normal;
+            }
+            .marck-script-regular {
+                font-family: 'Marck Script', cursive;
+                font-weight: 400;
+                font-style: normal;
             }
         </style>
     </head>
 
-    <body class="bg-rose-50 min-h-screen flex flex-col">
+    <body class="min-h-screen flex flex-col">
         <!-- Hero Section -->
+
         <section
             id="hero"
-            class="relative flex-grow flex flex-col justify-between overflow-hidden min-h-[80vh] sm:min-h-screen text-white text-center rounded-b-3xl shadow-lg"
+            class="relative flex-grow flex flex-col justify-between overflow-hidden min-h-[80vh] sm:min-h-screen text-center rounded-b-3xl shadow-lg bg-white"
         >
             <!-- Фоновое изображение -->
             <img
                 src="photo_2025-10-16_23-26-42.jpg"
                 alt="Свадебное фото"
-                class="absolute inset-0 w-full h-full object-cover object-[center_30%]"
+                class="absolute inset-0 w-full h-full object-cover object-center"
             />
 
-            <!-- Мягкий градиент: затемнение снизу и сверху, центр светлее -->
+            <!-- Мягкий градиент -->
             <div
-                class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60"
+                class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50"
             ></div>
 
             <!-- Верхняя надпись -->
             <div class="relative z-10 pt-10 sm:pt-16">
                 <h1
-                    class="names-font text-6xl sm:text-8xl font-normal text-shadow-custom"
+                    class="great-vibes-regular marck-script-regular text-6xl sm:text-8xl text-white text-shadow-custom"
                 >
                     Агдам
                 </h1>
                 <p
-                    class="serif-font text-xl sm:text-2xl italic mt-1 mb-1 text-shadow-custom"
+                    class="great-vibes-regular marck-script-regular text-2xl sm:text-3xl mt-2 mb-2 text-white text-shadow-custom"
                 >
-                    и
+                    and
                 </p>
                 <h1
-                    class="names-font text-6xl sm:text-8xl font-normal text-shadow-custom"
+                    class="great-vibes-regular marck-script-regular text-6xl sm:text-8xl text-white text-shadow-custom"
                 >
                     Айжамал
                 </h1>
@@ -64,13 +107,12 @@
 
             <!-- Нижний блок с таймером -->
             <div class="relative z-10 pb-10 sm:pb-16">
-                <!-- Мягкий градиент только для текста -->
                 <div
                     class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-none"
                 ></div>
 
                 <p
-                    class="text-lg sm:text-xl mb-4 font-medium serif-font text-shadow-custom tracking-wide relative z-10"
+                    class="text-lg sm:text-xl mb-4 font-medium serif-font text-white text-shadow-custom tracking-wide relative z-10"
                 >
                     До свадьбы
                 </p>
@@ -81,59 +123,63 @@
                     <div>
                         <span
                             id="days"
-                            class="block text-3xl sm:text-5xl font-semibold serif-font"
+                            class="block text-3xl sm:text-5xl font-semibold serif-font text-white"
                             >0</span
                         >
                         <span
-                            class="block text-xs sm:text-sm font-medium serif-font opacity-90"
+                            class="block text-xs sm:text-sm font-medium serif-font opacity-90 text-white"
                             >дней</span
                         >
                     </div>
                     <div>
                         <span
                             id="hours"
-                            class="block text-3xl sm:text-5xl font-semibold serif-font"
+                            class="block text-3xl sm:text-5xl font-semibold serif-font text-white"
                             >0</span
                         >
                         <span
-                            class="block text-xs sm:text-sm font-medium serif-font opacity-90"
+                            class="block text-xs sm:text-sm font-medium serif-font opacity-90 text-white"
                             >часов</span
                         >
                     </div>
                     <div>
                         <span
                             id="minutes"
-                            class="block text-3xl sm:text-5xl font-semibold serif-font"
+                            class="block text-3xl sm:text-5xl font-semibold serif-font text-white"
                             >0</span
                         >
                         <span
-                            class="block text-xs sm:text-sm font-medium serif-font opacity-90"
+                            class="block text-xs sm:text-sm font-medium serif-font opacity-90 text-white"
                             >минут</span
                         >
                     </div>
                     <div>
                         <span
                             id="seconds"
-                            class="block text-3xl sm:text-5xl font-semibold serif-font"
+                            class="block text-3xl sm:text-5xl font-semibold serif-font text-white"
                             >0</span
                         >
                         <span
-                            class="block text-xs sm:text-sm font-medium serif-font opacity-90"
+                            class="block text-xs sm:text-sm font-medium serif-font opacity-90 text-white"
                             >секунд</span
                         >
                     </div>
                 </div>
 
                 <p
-                    class="mt-6 text-sm sm:text-base opacity-90 font-medium serif-font text-shadow-custom relative z-10"
+                    class="mt-6 text-sm sm:text-base opacity-90 font-medium serif-font text-white text-shadow-custom relative z-10"
                 >
-                    14 ноября 2025 года • 18:00
+                    14 ноября 2025 года • 15:00
                 </p>
             </div>
         </section>
+
+        <div
+            class="my-8 h-0.5 bg-gradient-to-r from-rose-200/0 via-rose-400/50 to-rose-200/0 rounded-full"
+        ></div>
         <!-- 🌿 СЕКЦИЯ 1 — Дата -->
         <section
-            class="w-full max-w-md text-center pt-8 pb-10 bg-white/80 backdrop-blur-md rounded-3xl shadow-lg p-6 mx-auto mt-8 border border-rose-100 animate-fade-in-up"
+            class="w-full text-center bg-white/70 px-4 py-2 animate-fade-in-up"
         >
             <h2
                 class="classic-font text-xl sm:text-2xl font-normal tracking-widest mb-10 uppercase text-gray-700"
@@ -143,25 +189,29 @@
 
             <!-- Календарь -->
             <div class="flex justify-center flex-col items-center mb-10">
+                <!-- Дни недели -->
                 <div
                     class="flex justify-center w-full max-w-xs space-x-2 sm:space-x-3 text-sm italic font-light classic-font mb-4 text-gray-500"
                 >
-                    <span class="w-8 text-center">Пн</span>
                     <span class="w-8 text-center">Вт</span>
                     <span class="w-8 text-center">Ср</span>
                     <span class="w-8 text-center">Чт</span>
                     <span class="w-8 text-center">Пт</span>
                     <span class="w-8 text-center">Сб</span>
                     <span class="w-8 text-center">Вс</span>
+                    <span class="w-8 text-center">Пн</span>
                 </div>
 
+                <!-- Даты -->
                 <div
                     class="flex justify-center w-full max-w-xs space-x-2 sm:space-x-3 text-xl sm:text-2xl font-medium classic-font items-end"
                 >
+                    <!-- пустые дни до пятницы -->
                     <span class="w-8 text-center opacity-40">11</span>
                     <span class="w-8 text-center opacity-40">12</span>
                     <span class="w-8 text-center opacity-40">13</span>
 
+                    <!-- сердце на пятнице -->
                     <div
                         class="w-8 text-center relative flex flex-col items-center animate-pulse-slow"
                     >
@@ -192,6 +242,7 @@
                         ></div>
                     </div>
 
+                    <!-- последующие дни -->
                     <span class="w-8 text-center opacity-40">15</span>
                     <span class="w-8 text-center opacity-40">16</span>
                     <span class="w-8 text-center opacity-40">17</span>
@@ -236,15 +287,16 @@
                     class="classic-font text-base sm:text-lg text-gray-700 leading-relaxed"
                 >
                     Сбор гостей в
-                    <span class="font-semibold text-rose-600">16:30</span>
+                    <span class="font-semibold text-rose-600">15:00</span>
                 </p>
             </div>
         </section>
-
+        <div
+            class="my-8 h-0.5 bg-gradient-to-r from-rose-200/0 via-rose-400/50 to-rose-200/0 rounded-full"
+        ></div>
         <!-- 🌿 СЕКЦИЯ 2 — Место проведения -->
         <section
-            class="w-full max-w-md text-center bg-white/80 backdrop-blur-md rounded-3xl shadow-lg p-6 mx-auto mt-16 border border-rose-100 animate-fade-in-up"
-            style="animation-delay: 0.4s"
+            class="w-full text-center bg-white/70 px-4 py-2 animate-fade-in-up"
         >
             <h2
                 class="classic-font text-2xl sm:text-3xl font-normal tracking-widest uppercase text-gray-700 mb-10"
@@ -299,192 +351,270 @@
                 </a>
             </div>
         </section>
-
+        <div
+            class="my-8 h-0.5 bg-gradient-to-r from-rose-200/0 via-rose-400/50 to-rose-200/0 rounded-full"
+        ></div>
         <!-- 🌿 СЕКЦИЯ 3 — Программа дня -->
         <section
-            class="w-full max-w-md text-center bg-white/80 backdrop-blur-md rounded-3xl shadow-lg p-6 mx-auto mt-16 border border-rose-100 animate-fade-in-up"
-            style="animation-delay: 0.6s"
+            class="w-full bg-rose-50 max-w-2xl mx-auto text-center bg-white/80 px-6 py-10 animate-fade-in-up"
         >
             <h2
-                class="classic-font text-3xl sm:text-4xl font-light tracking-widest uppercase text-rose-800 mb-8 pb-3 border-b border-rose-200"
+                class="classic-font text-3xl sm:text-4xl font-light tracking-widest uppercase text-rose-800 mb-10 pb-3 border-b border-rose-200"
             >
                 Программа дня
             </h2>
 
             <div class="space-y-6 text-left">
+                <!-- 11:00 -->
                 <div
-                    class="flex items-start space-x-4 border-l-4 border-rose-400 pl-4 py-1 animate-fade-in-up"
+                    class="flex items-start gap-4 border-l-4 border-rose-400 bg-white/70 rounded-2xl pl-5 pr-4 py-3 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in-up"
                     style="animation-delay: 0.1s"
                 >
-                    <span
-                        class="font-bold text-rose-700 text-xl w-20 flex-shrink-0"
-                        >16:30</span
-                    >
-                    <p class="classic-font text-base sm:text-lg text-gray-700">
-                        Встреча гостей и <strong>приветственный напиток</strong>
-                    </p>
+                    <div>
+                        <p
+                            class="classic-font text-base sm:text-lg text-gray-700 leading-snug"
+                        >
+                            <span class="font-bold text-rose-700 text-xl mr-2"
+                                >11:00</span
+                            >
+                            Встреча гостей, место сбора и выезд
+                        </p>
+                        <p
+                            class="classic-font text-sm sm:text-base text-gray-500 mt-1"
+                        >
+                            Проспект Ленина, 11 / Гоголя 46
+                        </p>
+                    </div>
                 </div>
 
+                <!-- 12:00 -->
                 <div
-                    class="flex items-start space-x-4 border-l-4 border-rose-400 pl-4 py-1 animate-fade-in-up"
+                    class="flex items-start gap-4 border-l-4 border-rose-400 bg-white/70 rounded-2xl pl-5 pr-4 py-3 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in-up"
                     style="animation-delay: 0.2s"
                 >
-                    <span
-                        class="font-bold text-rose-700 text-xl w-20 flex-shrink-0"
-                        >17:00</span
-                    >
                     <p class="classic-font text-base sm:text-lg text-gray-700">
-                        Торжественная <strong>церемония</strong> бракосочетания
-                    </p>
-                </div>
-
-                <div
-                    class="flex items-start space-x-4 border-l-4 border-rose-400 pl-4 py-1 animate-fade-in-up"
-                    style="animation-delay: 0.3s"
-                >
-                    <span
-                        class="font-bold text-rose-700 text-xl w-20 flex-shrink-0"
-                        >17:30</span
-                    >
-                    <p class="classic-font text-base sm:text-lg text-gray-700">
+                        <span class="font-bold text-rose-700 text-xl mr-2"
+                            >12:00</span
+                        >
                         <strong>Фотосессия</strong> молодых и гостей
                     </p>
                 </div>
 
+                <!-- 13:00 -->
                 <div
-                    class="flex items-start space-x-4 border-l-4 border-rose-400 pl-4 py-1 animate-fade-in-up"
+                    class="flex items-start gap-4 border-l-4 border-rose-400 bg-white/70 rounded-2xl pl-5 pr-4 py-3 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in-up"
+                    style="animation-delay: 0.3s"
+                >
+                    <p class="classic-font text-base sm:text-lg text-gray-700">
+                        <span class="font-bold text-rose-700 text-xl mr-2"
+                            >13:00</span
+                        >
+                        <strong>Фуршет</strong>
+                    </p>
+                </div>
+
+                <!-- 16:00 -->
+                <div
+                    class="flex items-start gap-4 border-l-4 border-rose-400 bg-white/70 rounded-2xl pl-5 pr-4 py-3 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in-up"
                     style="animation-delay: 0.4s"
                 >
-                    <span
-                        class="font-bold text-rose-700 text-xl w-20 flex-shrink-0"
-                        >18:00</span
-                    >
                     <p class="classic-font text-base sm:text-lg text-gray-700">
-                        <strong>Банкет</strong>, тосты и поздравления
+                        <span class="font-bold text-rose-700 text-xl mr-2"
+                            >16:00</span
+                        >
+                        <strong>Банкет</strong>
                     </p>
                 </div>
 
+                <!-- 17:00 -->
                 <div
-                    class="flex items-start space-x-4 border-l-4 border-rose-400 pl-4 py-1 animate-fade-in-up"
+                    class="flex items-start gap-4 border-l-4 border-rose-400 bg-white/70 rounded-2xl pl-5 pr-4 py-3 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in-up"
                     style="animation-delay: 0.5s"
                 >
-                    <span
-                        class="font-bold text-rose-700 text-xl w-20 flex-shrink-0"
-                        >19:30</span
-                    >
                     <p class="classic-font text-base sm:text-lg text-gray-700">
-                        Развлекательная <strong>программа</strong> и конкурсы
+                        <span class="font-bold text-rose-700 text-xl mr-2"
+                            >17:00</span
+                        >
+                        Торжественная <strong>церемония бракосочетания</strong>
                     </p>
                 </div>
 
+                <!-- 23:00 -->
                 <div
-                    class="flex items-start space-x-4 border-l-4 border-rose-400 pl-4 py-1 animate-fade-in-up"
+                    class="flex items-start gap-4 border-l-4 border-rose-400 bg-white/70 rounded-2xl pl-5 pr-4 py-3 shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in-up"
                     style="animation-delay: 0.6s"
                 >
-                    <span
-                        class="font-bold text-rose-700 text-xl w-20 flex-shrink-0"
-                        >20:00</span
-                    >
                     <p class="classic-font text-base sm:text-lg text-gray-700">
-                        <strong>Первый танец</strong> молодожёнов и дискотека
-                    </p>
-                </div>
-
-                <div
-                    class="flex items-start space-x-4 border-l-4 border-rose-400 pl-4 py-1 animate-fade-in-up"
-                    style="animation-delay: 0.7s"
-                >
-                    <span
-                        class="font-bold text-rose-700 text-xl w-20 flex-shrink-0"
-                        >23:00</span
-                    >
-                    <p class="classic-font text-base sm:text-lg text-gray-700">
+                        <span class="font-bold text-rose-700 text-xl mr-2"
+                            >23:00</span
+                        >
                         Завершение праздника, <strong>проводы гостей</strong>
                     </p>
                 </div>
             </div>
         </section>
 
+        <style>
+            @keyframes fade-in-up {
+                0% {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .animate-fade-in-up {
+                animation: fade-in-up 0.8s ease forwards;
+            }
+        </style>
+        <div
+            class="my-8 h-0.5 bg-gradient-to-r from-rose-200/0 via-rose-400/50 to-rose-200/0 rounded-full"
+        ></div>
         <!-- 🌿 СЕКЦИЯ 4 — Подарки / Если не получится прийти -->
         <section
-            class="w-full max-w-md text-center bg-white/80 backdrop-blur-md rounded-3xl shadow-lg p-6 mx-auto mt-16 border border-rose-100 animate-fade-in-up"
-            style="animation-delay: 0.8s"
+            class="w-full max-w-xl mx-auto text-center bg-white/80 px-6 py-8 rounded-3xl animate-fade-in-up"
         >
             <h2
-                class="classic-font text-2xl sm:text-3xl font-light tracking-widest uppercase text-rose-800 mb-6"
+                class="classic-font text-3xl font-light tracking-widest uppercase text-rose-800 mb-6"
             >
                 Если не получится быть с нами
             </h2>
 
-            <p
-                class="classic-font text-base sm:text-lg text-gray-700 leading-relaxed mb-6"
-            >
+            <p class="classic-font text-lg text-gray-700 leading-relaxed mb-6">
                 Если у вас не получится быть с нами в этот день, но вы всё же
                 захотите нас поздравить — будем благодарны за любую поддержку.
             </p>
 
             <div
-                class="border border-rose-100 rounded-2xl bg-white/70 p-4 sm:p-6 shadow-inner mb-8"
+                class="border border-rose-100 rounded-2xl bg-white/80 p-6 mb-8"
             >
                 <p
                     class="classic-font text-sm sm:text-base text-gray-700 mb-3 font-medium"
                 >
-                    🎁 Реквизиты для подарка:
+                    Реквизиты для подарка:
                 </p>
 
-                <p
-                    class="classic-font text-base sm:text-lg text-rose-700 font-semibold mb-4"
-                >
-                    0000 0000 0000 0000
+                <div class="flex items-center justify-center space-x-2 mb-1">
+                    <div
+                        class="flex items-center justify-center space-x-2 mb-1 relative"
+                    >
+                        <p
+                            id="card-number"
+                            class="classic-font text-base sm:text-lg text-rose-700 font-semibold"
+                        >
+                            4169 5853 5677 8570
+                        </p>
+
+                        <button
+                            onclick="copyCardNumber(event)"
+                            class="text-rose-700 hover:text-rose-900 transition relative"
+                            aria-label="Копировать номер карты"
+                        >
+                            <!-- Иконка копирования -->
+                            <svg
+                                id="copy-icon"
+                                width="22px"
+                                height="22px"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M6 11C6 8.17157 6 6.75736 6.87868 5.87868C7.75736 5 9.17157 5 12 5H15C17.8284 5 19.2426 5 20.1213 5.87868C21 6.75736 21 8.17157 21 11V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H12C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16V11Z"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                ></path>
+                                <path
+                                    d="M6 19C4.34315 19 3 17.6569 3 16V10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H15C16.6569 2 18 3.34315 18 5"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                ></path>
+                            </svg>
+
+                            <!-- Всплывающее сообщение -->
+                            <span
+                                id="copy-tooltip"
+                                class="absolute -top-7 left-1/2 -translate-x-1/2 text-xs text-white bg-rose-600 px-2 py-1 rounded-md opacity-0 transition-opacity duration-300"
+                            >
+                                Скопировано!
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <p class="classic-font text-base text-gray-700 mb-1">
+                    Optima Bank — Agdam Yrymbekov
+                </p>
+                <p class="classic-font text-base text-gray-700 mb-4">
+                    +996 559 221 020 (Optima Bank / Mbank)
                 </p>
 
                 <div class="flex justify-center">
                     <img
-                        src="https://placehold.co/600x400/EEE/31343C"
+                        src="qr.jpg"
                         alt="QR-код для перевода"
-                        class="w-48 sm:w-64 h-auto rounded-xl shadow-md hover:scale-105 transition-transform duration-300"
+                        class="w-48 sm:w-64 h-64 rounded-xl transition-transform duration-300 hover:scale-105"
                     />
                 </div>
             </div>
 
             <p
-                class="handwriting-font text-3xl sm:text-4xl text-rose-700 leading-none drop-shadow-sm"
+                class="handwriting-font text-3xl sm:text-4xl text-rose-700 leading-none"
             >
                 Спасибо за вашу доброту
             </p>
         </section>
+
+        <style>
+            @keyframes fade-in-up {
+                0% {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .animate-fade-in-up {
+                animation: fade-in-up 0.8s ease forwards;
+            }
+        </style>
+        <div
+            class="my-8 h-0.5 bg-gradient-to-r from-rose-200/0 via-rose-400/50 to-rose-200/0 rounded-full"
+        ></div>
         <!-- 🌿 СЕКЦИЯ 5 — Анкета гостя -->
         <section
-            class="w-full max-w-md text-center bg-white/80 backdrop-blur-md rounded-3xl shadow-lg p-6 mx-auto mt-16 mb-16 border border-rose-100 animate-fade-in-up"
-            style="animation-delay: 1s"
+            class="w-full max-w-xl mx-auto text-center bg-white/80 px-6 py-8 animate-fade-in-up"
         >
             <h2
-                class="classic-font text-2xl sm:text-3xl font-light tracking-widest uppercase text-rose-800 mb-6"
+                class="classic-font text-3xl font-light tracking-widest uppercase text-rose-800 mb-6"
             >
                 Анкета гостя
             </h2>
 
-            <p
-                class="classic-font text-base sm:text-lg text-gray-700 leading-relaxed mb-8"
-            >
+            <p class="classic-font text-lg text-gray-700 leading-relaxed mb-8">
                 Просим заполнить эту анкету до
-                <span class="font-semibold text-rose-700">14.11.2025</span>,
+                <span class="font-semibold text-rose-700">11.11.2025</span>,
                 чтобы помочь нам в организации торжества
             </p>
 
-            <form class="text-left space-y-8">
+            <form class="text-left space-y-6">
                 <!-- Имя -->
                 <div>
                     <label
                         for="name"
                         class="block text-sm font-medium text-gray-700 mb-2 classic-font"
-                        >Имя и Фамилия</label
                     >
+                        Имя и Фамилия
+                    </label>
                     <input
                         type="text"
                         id="name"
-                        placeholder="Если будете с парой — укажите оба имени"
-                        class="w-full px-4 py-3 rounded-xl border border-rose-200 focus:ring-2 focus:ring-rose-400 focus:border-rose-400 outline-none bg-white/80 placeholder-gray-400 transition"
+                        placeholder="Укажите ваше имя"
+                        class="w-full px-4 py-3 rounded-xl border border-rose-200 focus:ring-2 focus:ring-rose-400 focus:border-rose-400 outline-none bg-white placeholder-gray-400 transition"
                     />
                 </div>
 
@@ -502,36 +632,13 @@
                             <input
                                 type="radio"
                                 name="attendance"
-                                value="alone"
+                                value="coming"
                                 class="w-5 h-5 text-rose-600 border-gray-300 focus:ring-rose-500 cursor-pointer"
                             />
-                            <span class="text-gray-700 classic-font text-base"
-                                >Я с удовольствием приду</span
-                            >
+                            <span class="text-gray-700 classic-font text-base">
+                                Я с удовольствием приду
+                            </span>
                         </label>
-
-                        <label
-                            class="flex items-center gap-3 cursor-pointer select-none"
-                        >
-                            <input
-                                type="radio"
-                                name="attendance"
-                                value="with-partner"
-                                class="w-5 h-5 text-rose-600 border-gray-300 focus:ring-rose-500 cursor-pointer"
-                            />
-                            <span class="text-gray-700 classic-font text-base"
-                                >Приду с парой</span
-                            >
-                        </label>
-
-                        <div class="ml-8">
-                            <input
-                                type="text"
-                                id="partner"
-                                placeholder="Имя пары"
-                                class="w-full px-4 py-2 rounded-xl border border-rose-200 focus:ring-2 focus:ring-rose-400 focus:border-rose-400 outline-none bg-white/80 placeholder-gray-400 transition"
-                            />
-                        </div>
 
                         <label
                             class="flex items-center gap-3 cursor-pointer select-none"
@@ -542,9 +649,9 @@
                                 value="not-coming"
                                 class="w-5 h-5 text-rose-600 border-gray-300 focus:ring-rose-500 cursor-pointer"
                             />
-                            <span class="text-gray-700 classic-font text-base"
-                                >К сожалению, не смогу присутствовать</span
-                            >
+                            <span class="text-gray-700 classic-font text-base">
+                                К сожалению, не смогу присутствовать
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -552,7 +659,7 @@
                 <!-- Кнопка -->
                 <div class="text-center pt-6">
                     <button
-                        type="button"
+                        type="submit"
                         class="bg-rose-700 text-white px-8 py-3 rounded-2xl font-medium text-lg shadow-md hover:bg-rose-600 transition-colors duration-300"
                     >
                         Отправить анкету
@@ -560,6 +667,121 @@
                 </div>
             </form>
         </section>
+        <div
+            class="my-8 h-0.5 bg-gradient-to-r from-rose-200/0 via-rose-400/50 to-rose-200/0 rounded-full"
+        ></div>
+        <!-- 🌿 СЕКЦИЯ 6 — Контакты -->
+        <section
+            class="w-full max-w-xl mx-auto text-center bg-white/80 px-6 py-10 animate-fade-in-up"
+        >
+            <h2
+                class="classic-font text-3xl font-light tracking-widest uppercase text-rose-800 mb-6"
+            >
+                Контакты
+            </h2>
+
+            <p class="classic-font text-lg text-gray-700 leading-relaxed mb-6">
+                Если у вас возникли вопросы, вы можете связаться с нашим
+                свадебным координатором:
+            </p>
+
+            <div class="space-y-2 mb-6">
+                <p
+                    class="classic-font text-xl sm:text-2xl font-semibold text-rose-700"
+                >
+                    Агдам
+                </p>
+                <p class="classic-font text-base sm:text-lg text-gray-700">
+                    +996 559 221 020
+                </p>
+            </div>
+
+            <div class="flex justify-center">
+                <a
+                    href="https://wa.me/996559221020"
+                    target="_blank"
+                    class="inline-flex items-center gap-2 bg-green-600 text-white font-medium text-lg px-6 py-3 rounded-2xl shadow-md hover:bg-green-500 transition-all duration-300 transform hover:scale-105"
+                >
+                    <!-- Иконка WhatsApp -->
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-message-circle"
+                    >
+                        <path
+                            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"
+                        ></path>
+                    </svg>
+                    Написать в WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <div id="music-player">
+            <button id="music-btn" aria-label="Воспроизвести музыку">
+                <!-- Play icon -->
+                <svg id="play-icon" viewBox="0 0 24 24">
+                    <path d="M4 2v20l18-10L4 2z" />
+                </svg>
+                <!-- Pause icon -->
+                <svg id="pause-icon" viewBox="0 0 24 24" style="display: none">
+                    <path d="M6 2h4v20H6zM14 2h4v20h-4z" />
+                </svg>
+            </button>
+            <audio id="wedding-audio" loop>
+                <source src="ed-perfect.mp3" type="audio/mp3" />
+                Ваш браузер не поддерживает аудио.
+            </audio>
+        </div>
+
+        <script>
+            const btn = document.getElementById('music-btn');
+            const audio = document.getElementById('wedding-audio');
+            const playIcon = document.getElementById('play-icon');
+            const pauseIcon = document.getElementById('pause-icon');
+
+            btn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio
+                        .play()
+                        .catch(() =>
+                            alert(
+                                'Воспроизведение может быть заблокировано браузером. Кликните снова.'
+                            )
+                        );
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                } else {
+                    audio.pause();
+                    playIcon.style.display = 'block';
+                    pauseIcon.style.display = 'none';
+                }
+            });
+        </script>
+
+        <!-- Tailwind анимация (если используете Tailwind) -->
+        <style>
+            @keyframes fade-in-up {
+                0% {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .animate-fade-in-up {
+                animation: fade-in-up 0.8s ease forwards;
+            }
+        </style>
 
         <!-- Tailwind + анимации -->
         <style>
@@ -582,7 +804,7 @@
         <!-- Countdown Script -->
         <script>
             const weddingDate = new Date(
-                'November 15, 2025 18:00:00'
+                'November 15, 2025 15:00:00'
             ).getTime();
 
             const x = setInterval(function () {
@@ -615,6 +837,44 @@
                         "<p class='text-xl sm:text-2xl font-extrabold serif-font text-shadow-custom'>Свадьба состоялась!</p>";
                 }
             }, 1000);
+        </script>
+
+        <script>
+            function copyCardNumber(event) {
+                const text = document.getElementById('card-number').innerText;
+                const icon = document.getElementById('copy-icon');
+                const tooltip = document.getElementById('copy-tooltip');
+
+                navigator.clipboard.writeText(text).then(() => {
+                    // Меняем цвет и иконку
+                    icon.innerHTML = `
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5 13l4 4L19 7" />
+        `;
+                    icon.classList.add('text-green-600');
+
+                    // Показываем сообщение
+                    tooltip.style.opacity = '1';
+
+                    // Возвращаем обратно через 2 секунды
+                    setTimeout(() => {
+                        icon.innerHTML = `
+                <path
+                    d="M6 11C6 8.17157 6 6.75736 6.87868 5.87868C7.75736 5 9.17157 5 12 5H15C17.8284 5 19.2426 5 20.1213 5.87868C21 6.75736 21 8.17157 21 11V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H12C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16V11Z"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                ></path>
+                <path
+                    d="M6 19C4.34315 19 3 17.6569 3 16V10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H15C16.6569 2 18 3.34315 18 5"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                ></path>
+            `;
+                        icon.classList.remove('text-green-600');
+                        tooltip.style.opacity = '0';
+                    }, 2000);
+                });
+            }
         </script>
     </body>
 </html>
